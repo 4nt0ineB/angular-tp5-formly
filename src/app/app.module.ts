@@ -17,6 +17,7 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 /* Définition des messages d'avertissment formly */
 export function minLengthValidationMessage(
@@ -63,6 +64,7 @@ export function maxValidationMessage(error: any, field: FormlyFieldConfig) {
     MatProgressSpinnerModule,
     MatCardModule,
     MatDividerModule,
+    MatFormFieldModule,
   ],
   declarations: [
     AppComponent,

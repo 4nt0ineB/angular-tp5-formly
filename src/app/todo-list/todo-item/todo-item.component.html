@@ -6,7 +6,31 @@
   }"
 >
   <mat-card-header>
-    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-title>
+      <div *ngIf="editMode; else elseBlock">
+        <div>
+          <mat-form-field class="example-full-width">
+            <mat-label>Change label</mat-label>
+            <input
+              matInput
+              type="text"
+              name="label"
+              [(ngModel)]="todo.label"
+              (keyup.enter)="updateLabel()"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <ng-template #elseBlock>
+        <span style="font-size: 70%;"> {{ todo.label }} </span>
+        <i class="material-icons right" id="delete" (click)="delete()"
+          >delete</i
+        >
+        <i class="material-icons right" id="update" (click)="changeEditMode()"
+          >edit</i
+        >
+      </ng-template></mat-card-title
+    >
     <mat-card-subtitle>{{
       todo.creationDate | customDate: true
     }}</mat-card-subtitle>
@@ -15,7 +39,6 @@
     <button mat-button (click)="changeItemState()">
       {{ todo.done ? 'Done' : 'Undone' }}
     </button>
-    <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>
 <!-- 
