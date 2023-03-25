@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
@@ -10,63 +10,38 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 export class TodoFormlyComponent implements OnInit {
   form = new FormGroup({});
   model = {};
+  // https://formly.dev/docs/examples/validation/built-in-validations
+  // ajouter un suffix au champs (zzZ...) :
+  // https://formly.dev/docs/examples/other/material-prefix-suffix
   fields: FormlyFieldConfig[] = [
     {
-      key: 'input',
+      key: 'label',
       type: 'input',
       props: {
-        label: 'Input',
-        placeholder: 'Input placeholder',
+        label: 'Label',
+        placeholder: '',
         required: true,
+        maxLength: 20,
+        minLength: 4,
+        pattern: /^[a-zA-Z0-9àáâäãåèéêëìíîïòóôöõùúûüýÿ\s]*$/,
       },
-    },
-    {
-      key: 'textarea',
-      type: 'textarea',
-      props: {
-        label: 'Textarea',
-        placeholder: 'Textarea placeholder',
-        required: true,
-      },
-    },
-    {
-      key: 'checkbox',
-      type: 'checkbox',
-      props: {
-        label: 'Checkbox',
-      },
-    },
-    {
-      key: 'select',
-      type: 'select',
-      props: {
-        label: 'Select',
-        placeholder: 'Select placeholder',
-        required: true,
-        options: [
-          { label: 'Option 1', value: '1' },
-          { label: 'Option 2', value: '2' },
-          { label: 'Option 3', value: '3' },
-        ],
-      },
-    },
-    {
-      key: 'radio',
-      type: 'radio',
-      props: {
-        label: 'Radio',
-        required: true,
-        options: [
-          { label: 'Option 1', value: '1' },
-          { label: 'Option 2', value: '2' },
-        ],
+
+      validation: {
+        messages: {
+          pattern: 'Le label ne peut pas contenir de caractères spéciaux',
+        },
       },
     },
   ];
+
+  @Output()
+  newLabelEvent = new EventEmitter<string>();
+
   constructor() {}
   onSubmit(): void {
     if (this.form.valid) {
-      alert(JSON.stringify(this.model, null, 2));
+      this.newLabelEvent.emit(this.model['label']);
+      this.form.reset();
     }
   }
   ngOnInit() {}

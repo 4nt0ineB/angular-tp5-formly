@@ -12,8 +12,34 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TodoFormComponent } from './todo-list/todo-form/todo-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { TodoFormlyComponent } from './todo-list/todo-formly/todo-formly.component';
-import { FormlyModule } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCard, MatCardModule } from '@angular/material/card';
+
+/* Définition des messages d'avertissment formly */
+export function minLengthValidationMessage(
+  error: any,
+  field: FormlyFieldConfig
+) {
+  return `Ce champs doit être supérieur à ${field.props.minLength} caractères`;
+}
+
+export function maxLengthValidationMessage(
+  error: any,
+  field: FormlyFieldConfig
+) {
+  return `Ce champs doit être infieur à ${field.props.maxLength} caractères`;
+}
+
+export function minValidationMessage(error: any, field: FormlyFieldConfig) {
+  return `Doit être supérieur à ${field.props.min}`;
+}
+
+export function maxValidationMessage(error: any, field: FormlyFieldConfig) {
+  return `Doit être inférieur à ${field.props.max}`;
+}
+/* ---------- */
 
 @NgModule({
   imports: [
@@ -25,10 +51,16 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
     MatButtonModule,
     FormlyModule.forRoot({
       validationMessages: [
-        { name: 'required', message: 'This field is required' },
+        { name: 'required', message: 'Champs requis' },
+        { name: 'minLength', message: minLengthValidationMessage },
+        { name: 'maxLength', message: maxLengthValidationMessage },
+        { name: 'min', message: minValidationMessage },
+        { name: 'max', message: maxValidationMessage },
       ],
     }),
     FormlyMaterialModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
   ],
   declarations: [
     AppComponent,

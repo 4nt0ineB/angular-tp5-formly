@@ -11,7 +11,7 @@ import { TodoService } from '../todo.service';
 })
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
-  loaded: boolean = true;
+  loaded: boolean = false;
 
   constructor(public todoService: TodoService) {
     this.todoService = todoService;
@@ -55,6 +55,6 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getTodos();
+    this.getTodos();
   }
 }
