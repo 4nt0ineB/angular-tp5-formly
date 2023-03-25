@@ -15,7 +15,8 @@ import { TodoFormlyComponent } from './todo-list/todo-formly/todo-formly.compone
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 /* Définition des messages d'avertissment formly */
 export function minLengthValidationMessage(
@@ -61,6 +62,7 @@ export function maxValidationMessage(error: any, field: FormlyFieldConfig) {
     FormlyMaterialModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatDividerModule,
   ],
   declarations: [
     AppComponent,

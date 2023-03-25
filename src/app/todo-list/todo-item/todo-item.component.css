@@ -18,3 +18,13 @@ a {
   max-width: 400px;
   margin-bottom: 8px;
 }
+
+.undone {
+  background-color: white;
+  color: black;
+}
+
+.done {
+  background-color: grey;
+  color: white;
+}

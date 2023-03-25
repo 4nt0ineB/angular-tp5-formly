@@ -1,15 +1,25 @@
-<mat-card class="example-card">
+<mat-card
+  class="example-card purple undone"
+  [ngClass]="{
+    done: todo.done,
+    ' darken-3  white-text': !todo.done
+  }"
+>
   <mat-card-header>
-    <mat-card-title-group>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Small</mat-card-subtitle>
-      <img mat-card-sm-image />
-    </mat-card-title-group>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>{{
+      todo.creationDate | customDate: true
+    }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content> b </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="changeItemState()">
+      {{ todo.done ? 'Done' : 'Undone' }}
+    </button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
 </mat-card>
-aze
-<!-- <div class="col s4">
+<!-- 
+<div class="col s4">
   <div
     class="card"
     [ngClass]="{
@@ -53,4 +63,3 @@ aze
     </div>
   </div>
 </div> -->
-<!--   -->
