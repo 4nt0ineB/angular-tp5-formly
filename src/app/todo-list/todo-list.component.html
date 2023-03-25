@@ -1,7 +1,7 @@
 <div
   class="container"
   *ngIf="loaded; else notLoaded"
-  style="padding: 1em; padding-top: 10em;"
+  style="padding: 1em; padding-top: 10em; "
 >
   <div class="row">
     <todo-formly (newLabelEvent)="addTodo($event)"></todo-formly>
@@ -9,11 +9,21 @@
   <br />
   <mat-divider></mat-divider>
   <br />
+
+  <mat-grid-list cols="3">
+    <mat-grid-tile *ngFor="let todo of todos">
+      <todo-item
+        [todo]="todo"
+        (updateLabelEvent)="updateTodo($event)"
+        (deleteTodoEvent)="deleteTodo($event)"
+      ></todo-item>
+    </mat-grid-tile>
+  </mat-grid-list>
   <!-- Formulaire classique décommenter materialize dans index.html -->
   <!--  <div class="row">
     <todo-form (newLabelEvent)="addTodo($event)"></todo-form>
   </div> -->
-  <div class="row center" layout="row">
+  <!-- <div class="row center" layout="row">
     <div *ngFor="let todo of todos">
       <todo-item
         [todo]="todo"
@@ -21,7 +31,7 @@
         (deleteTodoEvent)="deleteTodo($event)"
       ></todo-item>
     </div>
-  </div>
+  </div> -->
 </div>
 <ng-template #notLoaded>
   <div class="container" style="text-align: center; padding: 20%;">

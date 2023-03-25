@@ -6,7 +6,12 @@
   }"
 >
   <mat-card-header>
-    <mat-card-title>
+    <mat-card-title
+      ><div class="" style="font-size: small; opacity: 0.5;">
+        {{ todo.creationDate | customDate: true }}
+      </div></mat-card-title
+    >
+    <mat-card-subtitle>
       <div *ngIf="editMode; else elseBlock">
         <div>
           <mat-form-field class="example-full-width">
@@ -22,22 +27,19 @@
         </div>
       </div>
       <ng-template #elseBlock>
-        <span style="font-size: 70%;"> {{ todo.label }} </span>
+        <span style="font-size: large"> {{ todo.label }} </span>
         <i class="material-icons right" id="delete" (click)="delete()"
           >delete</i
         >
         <i class="material-icons right" id="update" (click)="changeEditMode()"
           >edit</i
         >
-      </ng-template></mat-card-title
-    >
-    <mat-card-subtitle>{{
-      todo.creationDate | customDate: true
-    }}</mat-card-subtitle>
+      </ng-template>
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions>
     <button mat-button (click)="changeItemState()">
-      {{ todo.done ? 'Done' : 'Undone' }}
+      {{ todo.done ? 'To do' : 'Done' }}
     </button>
   </mat-card-actions>
 </mat-card>
